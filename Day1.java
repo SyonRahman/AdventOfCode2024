@@ -33,6 +33,18 @@ public class Day1 {
             }
         }
         System.out.println(total);
+
+        int totaltimes = 0;
+        for (int i = 0; i < fileData.size(); i++) {
+            int numberoftimes = 0;
+            for (int v = 0; v < fileData.size(); v++) {
+                if (firstList.get(i) == secondList.get(v)) {
+                    numberoftimes++;
+                }
+            }
+            totaltimes += numberoftimes * firstList.get(i);
+        }
+        System.out.println(totaltimes);
     }
 
 
