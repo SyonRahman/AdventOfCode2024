@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Day2 {
+
+    private static ArrayList<String[]> errorArrays = new ArrayList<String[]>();
+
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/day2.txt");
-
 
         boolean safe = true;
         int numberofsafes = 0;
@@ -17,6 +19,7 @@ public class Day2 {
             }
         }
         System.out.println(numberofsafes);
+        System.out.println(errorArrays);
     }
 
     public static boolean safeOrNot(String[] nums) {
@@ -27,16 +30,19 @@ public class Day2 {
         for (int i = 0; i < nums.length - 1; i++) {
             if (increasing) {
                 if (!(Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) >= 1 && Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) <= 3)) {
+                    errorArrays.add(nums);
                     return false;
                 }
             } else {
                 if (!(Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) >= -3 && Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) <= -1)) {
+                    errorArrays.add(nums);
                     return false;
                 }
             }
         }
         return true;
     }
+
 
 
     public static ArrayList<String> getFileData(String fileName) {
