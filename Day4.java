@@ -62,15 +62,25 @@ public class Day4 {
             }
         }
 
-        for (int r = grid.length - 1; r > 3; r--) {
-            for (int c = 0; c < grid[r].length; c++) {
-                
-            }
-        }
+//        for (int r = grid.length - 1; r > 3; r--) {
+//            for (int c = 0; c < grid[r].length - 3; c++) {
+//                if ((grid[r][c] + grid[r-1][c+1] + grid[r-2][c+2] + grid[r-3][c+3]).equals("XMAS")) {
+//                    numberofXmas++;
+//                }
+//                if ((grid[r][c] + grid[r-1][c+1] + grid[r-2][c+2] + grid[r-3][c+3]).equals("SAMX")) {
+//                    numberofXmas++;
+//                }
+//            }
+//        }
 
         for (int r = 0; r < grid.length - 3; r++) {
             for (int c = grid[r].length - 1; c > 3; c--) {
-
+                if ((grid[r][c] + grid[r+1][c-1] + grid[r+2][c-2] + grid[r+3][c-3]).equals("XMAS")) {
+                    numberofXmas++;
+                }
+                if ((grid[r][c] + grid[r+1][c-1] + grid[r+2][c-2] + grid[r+3][c-3]).equals("SAMX")) {
+                    numberofXmas++;
+                }
             }
         }
 
