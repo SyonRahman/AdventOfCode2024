@@ -36,13 +36,15 @@ public class Day1 {
 
         int totaltimes = 0;
         for (int i = 0; i < fileData.size(); i++) {
+            int k = firstList.get(i);
             int numberoftimes = 0;
             for (int v = 0; v < fileData.size(); v++) {
-                if (firstList.get(i) == secondList.get(v)) {
+                int j = secondList.get(v);
+                if (k == j) {
                     numberoftimes++;
                 }
             }
-            totaltimes += numberoftimes * firstList.get(i);
+            totaltimes += numberoftimes * k;
         }
         System.out.println(totaltimes);
     }
