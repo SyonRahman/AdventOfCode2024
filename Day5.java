@@ -30,10 +30,12 @@ public class Day5 {
 
         for (int i = 0; i < pageNumbers.size(); i++) {
             int[] nums = new int[pageNumbers.get(i).split(",").length];
+            ArrayList<Integer> numsarray = new ArrayList<Integer>();
             for (int v = 0; v < pageNumbers.get(i).split(",").length; v++) {
                 nums[v] = Integer.parseInt(pageNumbers.get(i).split(",")[v]);
+                numsarray.add(Integer.parseInt(pageNumbers.get(i).split(",")[v]));
             }
-            if (pageRules(nums)) {
+            if (pageRules(nums, numsarray, rule1, rule2)) {
                 middlesum += nums[nums.length / 2];
             }
         }
@@ -42,8 +44,26 @@ public class Day5 {
 
     }
 
-    public static boolean pageRules(int[] nums) {
-
+    public static boolean pageRules(int[] nums, ArrayList<Integer> numsarray, ArrayList<Integer> firstnums, ArrayList<Integer> secondnums) {
+//        for (int i = 0; i < firstnums.size(); i++) {
+//            for (int j = 0; j < nums.length - 1; j++) {
+//                if (nums[j] == firstnums.get(i)) {
+//                    for (int k = j+1; k < nums.length; k++) {
+//                        if (!(nums[k] == secondnums.get(i))) {
+//                            return false;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        for (int i = 0; i < firstnums.size(); i++) {
+            if (numsarray.contains(firstnums.get(i)) && numsarray.contains(secondnums.get(i))) {
+                if (!(firstnums.indexOf(firstnums.get(i)) < secondnums.indexOf(secondnums.get(i)))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static ArrayList<String> getFileData(String fileName) {
