@@ -34,11 +34,13 @@ public class Day1 {
         }
         System.out.println(total);
 
+
+
         int totaltimes = 0;
-        for (int i = 0; i < fileData.size(); i++) {
+        for (int i = 0; i < firstList.size(); i++) {
             int k = firstList.get(i);
             int numberoftimes = 0;
-            for (int v = 0; v < fileData.size(); v++) {
+            for (int v = 0; v < firstList.size(); v++) {
                 int j = secondList.get(v);
                 if (k == j) {
                     numberoftimes++;
