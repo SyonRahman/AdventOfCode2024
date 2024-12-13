@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Day5 {
+
+    private static ArrayList<ArrayList<Integer>> incorrectBooks = new ArrayList<>();
+
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/day5.txt");
         ArrayList<String> rules = new ArrayList<String>();
@@ -29,42 +32,47 @@ public class Day5 {
         System.out.println(pageNumbers);
 
         for (int i = 0; i < pageNumbers.size(); i++) {
-            int[] nums = new int[pageNumbers.get(i).split(",").length];
-            ArrayList<Integer> numsarray = new ArrayList<Integer>();
+            ArrayList<Integer> nums = new ArrayList<Integer>();
             for (int v = 0; v < pageNumbers.get(i).split(",").length; v++) {
-                nums[v] = Integer.parseInt(pageNumbers.get(i).split(",")[v]);
-                numsarray.add(Integer.parseInt(pageNumbers.get(i).split(",")[v]));
+                nums.add(Integer.parseInt(pageNumbers.get(i).split(",")[v]));
             }
-            if (pageRules(nums, numsarray, rule1, rule2)) {
-                middlesum += nums[nums.length / 2];
+            if (contains(nums, rule1, rule2)) {
+                middlesum += nums.get(nums.size() / 2);
             }
         }
 
         System.out.println(middlesum);
+        System.out.println(incorrectBooks);
+
+        for (int i = 0; i < incorrectBooks.size(); i++) {
+            ArrayList<Integer> bookArray = incorrectBooks.get(i);
+            for (int v = 0; v < rule1.size(); v++) {
+
+            }
+        }
 
     }
 
-    public static boolean pageRules(int[] nums, ArrayList<Integer> numsarray, ArrayList<Integer> firstnums, ArrayList<Integer> secondnums) {
-//        for (int i = 0; i < firstnums.size(); i++) {
-//            for (int j = 0; j < nums.length - 1; j++) {
-//                if (nums[j] == firstnums.get(i)) {
-//                    for (int k = j+1; k < nums.length; k++) {
-//                        if (!(nums[k] == secondnums.get(i))) {
-//                            return false;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        for (int i = 0; i < firstnums.size(); i++) {
-            if (numsarray.contains(firstnums.get(i)) && numsarray.contains(secondnums.get(i))) {
-                if (!(firstnums.indexOf(firstnums.get(i)) < secondnums.indexOf(secondnums.get(i)))) {
+    public static boolean contains(ArrayList<Integer> numsarray, ArrayList<Integer> rule1, ArrayList<Integer> rule2) {
+        for (int i = 0; i < rule1.size(); i++) {
+            int a = numsarray.indexOf(rule1.get(i));
+            int b = numsarray.indexOf(rule2.get(i));
+            if (a != -1 && b != -1) {
+                if (a > b) {
+                    incorrectBooks.add(numsarray);
                     return false;
                 }
             }
         }
         return true;
     }
+
+
+
+
+
+
+
 
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
