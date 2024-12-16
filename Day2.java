@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class Day2 {
 
+    private static ArrayList<ArrayList<Integer>> incorrectSafes = new ArrayList<>();
+    private static ArrayList<ArrayList<Integer>> newCorrectSafes = new ArrayList<>();
 
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/day2.txt");
@@ -17,46 +19,24 @@ public class Day2 {
         int one_error_safes = 0;
         for (int i = 0; i < fileData.size(); i++) {
             String[] splitnums = fileData.get(i).split(" ");
-            if (safeOrNot(splitnums)) {
+            ArrayList<Integer> safenums = new ArrayList<>();
+            for (int v = 0; v < splitnums.length; v++) {
+                safenums.add(Integer.parseInt(splitnums[v]));
+            }
+            if (safeOrNot(splitnums, safenums)) {
                 numberofsafes++;
             }
         }
-        for (int i = 0; i < fileData.size(); i++) {
-            String[] splitnums = fileData.get(i).split(" ");
-            if (safeOrNotbyOne(splitnums)) {
-                one_error_safes++;
-            }
-        }
         System.out.println(numberofsafes);
-        System.out.println(one_error_safes);
+        System.out.println(incorrectSafes.size());
+        System.out.println(incorrectSafes);
+        System.out.println(one_error_safes + numberofsafes);
 
     }
 
-    public static boolean safeOrNotbyOne(String[] nums) {
-        boolean increasing = false;
-        int numberoferrors = 0;
-        ArrayList<String> numbers = new ArrayList<String>();
-        for (int i = 0; i < nums.length; i++) {
-            numbers.add(nums[i]);
-        }
-        if (Integer.parseInt(nums[1]) - Integer.parseInt(nums[0]) > 0) {
-            increasing = true;
-        }
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (increasing) {
-                if (!(Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) >= 1 && Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) <= 3)) {
-                    return false;
-                }
-            } else {
-                if (!(Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) >= -3 && Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) <= -1)) {
-                    return false;
-                }
-            }
-        }
 
-    }
 
-    public static boolean safeOrNot(String[] nums) {
+    public static boolean safeOrNot(String[] nums, ArrayList<Integer> safenums) {
         boolean increasing = false;
         if (Integer.parseInt(nums[1]) - Integer.parseInt(nums[0]) > 0) {
             increasing = true;
@@ -64,15 +44,32 @@ public class Day2 {
         for (int i = 0; i < nums.length - 1; i++) {
             if (increasing) {
                 if (!(Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) >= 1 && Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) <= 3)) {
+                    incorrectSafes.add(safenums);
                     return false;
                 }
             } else {
                 if (!(Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) >= -3 && Integer.parseInt(nums[i + 1]) - Integer.parseInt(nums[i]) <= -1)) {
+                    incorrectSafes.add(safenums);
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    public static boolean fixSafe() {
+        for (int i = 0; i < incorrectSafes.size(); i++) {
+            ArrayList<Integer> checkArray = incorrectSafes.get(i);
+            if (checkArray.get(1) - checkArray.get(0) > 0) {
+                
+            }
+            ArrayList<Integer> removedElementArray = new ArrayList<>();
+            for (int v = 0; v < checkArray.size(); v++) {
+                if () {
+
+                }
+            }
+        }
     }
 
 
