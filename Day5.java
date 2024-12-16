@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Day5 {
@@ -15,6 +17,7 @@ public class Day5 {
         ArrayList<Integer> rule1 = new ArrayList<Integer>();
         ArrayList<Integer> rule2 = new ArrayList<Integer>();
         int middlesum = 0;
+        int newmiddlesum = 0;
         for (int i = 0; i < 1176; i++) {
             rules.add(fileData.get(i));
         }
@@ -47,8 +50,17 @@ public class Day5 {
         for (int i = 0; i < incorrectBooks.size(); i++) {
             ArrayList<Integer> bookArray = incorrectBooks.get(i);
             for (int v = 0; v < rule1.size(); v++) {
-
+                int a = bookArray.indexOf(rule1.get(v));
+                int b = bookArray.indexOf(rule2.get(i));
+                if (a != -1 && b!= -1) {
+                    if (a > b) {
+                        Collections.swap(bookArray, a, b);
+                        v = 0;
+                    }
+                }
             }
+            newmiddlesum += bookArray.get(bookArray.size() / 2);
+            System.out.println(newmiddlesum);
         }
 
     }
