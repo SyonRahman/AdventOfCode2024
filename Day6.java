@@ -29,9 +29,14 @@ public class Day6 {
             }
         }
 
-        while (true) {
+        boolean isRepeating = true;
+        while (isRepeating) {
             if (current.equals("^")) {
                 while (!(grid[row][column].equals("#"))) {
+                    if (row == 0) {
+                        isRepeating = false;
+                        break;
+                    }
                     grid[row][column] = "X";
                     row--;
                 }
@@ -39,11 +44,34 @@ public class Day6 {
             }
             if (current.equals(">")) {
                 while (!(grid[row][column].equals("#"))) {
+                    if (column == grid[row].length - 1) {
+                        isRepeating = false;
+                        break;
+                    }
                     grid[row][column] = "X";
                     column++;
                 }
+                current = "v";
+            }
+            if (current.equals("v")) {
+                while (!(grid[row][column].equals("#"))) {
+                    if (row == grid.length - 1) {
+                        isRepeating = false;
+                        break;
+                    }
+                    grid[row][column] = "X";
+                    row++;
+                }
             }
         }
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[0].length; c++) {
+                if (grid[r][c].equals("X")) {
+                    positions++;
+                }
+            }
+        }
+        System.out.println(positions);
     }
 
 
