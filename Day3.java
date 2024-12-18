@@ -33,7 +33,38 @@ public class Day3 {
 
         }
 
+        ArrayList<String> newMatches = new ArrayList<>();
+        for (int i = 0; i < fileData.size(); i++) {
+            String searchString = fileData.get(i);
+            String newregex = "mul\\([1-9][0-9]{0,2},[1-9][0-9]{0,2}\\)|do\\(\\)|don't\\(\\)";
+            Matcher m = Pattern.compile(newregex).matcher(searchString);
+            while (m.find()) {
+                newMatches.add(m.group());
+            }
+        }
+        System.out.println(newMatches);
+
+        boolean multiply = true;
+        int newresult = 0;
+        for (int i = 0; i < newMatches.size(); i++) {
+            if (newMatches.get(i).equals("do()")) {
+                multiply = true;
+            }
+            if (newMatches.get(i).equals("don't()")) {
+                multiply = false;
+            }
+            if (multiply && newMatches.get(i).contains("mul")) {
+                int parenthesis1 = newMatches.get(i).indexOf("(");
+                int parenthesis2 = newMatches.get(i).indexOf(")");
+                int comma = newMatches.get(i).indexOf(",");
+                int num1 = Integer.parseInt(newMatches.get(i).substring(parenthesis1 + 1, comma));
+                int num2 = Integer.parseInt(newMatches.get(i).substring(comma + 1, parenthesis2));
+                newresult += num1 * num2;
+            }
+        }
+
         System.out.println(totalresult);
+        System.out.println(newresult);
 
     }
 
