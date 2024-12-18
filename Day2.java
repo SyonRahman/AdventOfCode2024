@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Day2 {
 
     private static ArrayList<ArrayList<Integer>> incorrectSafes = new ArrayList<>();
-    private static ArrayList<ArrayList<Integer>> newCorrectSafes = new ArrayList<>();
+    private static ArrayList<ArrayList<Integer>> newSafes = new ArrayList<>();
 
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/day2.txt");
@@ -59,17 +59,19 @@ public class Day2 {
 
     public static boolean fixSafe() {
         for (int i = 0; i < incorrectSafes.size(); i++) {
-            ArrayList<Integer> checkArray = incorrectSafes.get(i);
-            if (checkArray.get(1) - checkArray.get(0) > 0) {
-                
+            int numberoferrors = 0;
+            boolean increasing = false;
+            ArrayList<Integer> checkSafe = incorrectSafes.get(i);
+            if (checkSafe.get(1) - checkSafe.get(0) > 0) {
+                increasing = true;
             }
-            ArrayList<Integer> removedElementArray = new ArrayList<>();
-            for (int v = 0; v < checkArray.size(); v++) {
-                if () {
-
+            for (int v = 0; v < incorrectSafes.get(i).size() - 1; v++) {
+                if (increasing) {
+                    if (!(checkSafe.get(v + 1) - checkSafe.get(v) >= 1))
                 }
             }
         }
+
     }
 
 
