@@ -40,6 +40,9 @@ public class Day6 {
                     grid[row][column] = "X";
                     row--;
                 }
+                if (row != 0) {
+                    row++;
+                }
                 current = ">";
             }
             if (current.equals(">")) {
@@ -50,6 +53,9 @@ public class Day6 {
                     }
                     grid[row][column] = "X";
                     column++;
+                }
+                if (column != grid[row].length - 1) {
+                    column--;
                 }
                 current = "v";
             }
@@ -62,6 +68,24 @@ public class Day6 {
                     grid[row][column] = "X";
                     row++;
                 }
+                if (row != grid.length - 1) {
+                    row--;
+                }
+                current = "<";
+            }
+            if (current.equals("<")) {
+                while (!(grid[row][column].equals("#"))) {
+                    if (column == 0) {
+                        isRepeating = false;
+                        break;
+                    }
+                    grid[row][column] = "X";
+                    column--;
+                }
+                if (column != 0) {
+                    column++;
+                }
+                current = "^";
             }
         }
         for (int r = 0; r < grid.length; r++) {
